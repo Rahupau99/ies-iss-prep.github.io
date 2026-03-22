@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="mobile-web-app-capable" content="yes"/>
-<title>IES/ISS Prep — Question Paper Library</title>
+<title>IES/ISS Prep — Question Paper Library v2</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -169,38 +169,138 @@ body::before {
 .filter-btn:hover { border-color: var(--gold-glow); color: var(--cream); }
 .filter-btn.active { background: var(--gold-dim); border-color: var(--border2); color: var(--gold2); }
 
-/* ── YEAR GROUP ── */
-.year-group { margin-bottom: 36px; }
-.year-heading {
-  font-family: 'DM Mono', monospace;
+/* ── SUBJECT GROUP ── */
+.subject-group { margin-bottom: 28px; }
+.subject-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.subject-icon {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.subject-title-block { flex: 1; min-width: 0; }
+.subject-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream);
+}
+.subject-meta {
   font-size: 11px;
-  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.subject-exam-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* ── YEAR PILLS ROW ── */
+.year-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-left: 48px;
+}
+.year-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 140px;
+}
+.year-pill::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.2s;
+}
+.year-pill:hover { border-color: rgba(212,168,67,0.3); background: var(--bg3); }
+.year-pill:hover::before { background: var(--gold); }
+.year-pill.pill-soon { opacity: 0.45; pointer-events: none; }
+
+.pill-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gold2);
+  line-height: 1;
+}
+.pill-body { flex: 1; min-width: 0; }
+.pill-status {
+  font-size: 10px;
+  color: var(--muted2);
+  margin-top: 1px;
+}
+.pill-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.pill-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+.pill-prog {
+  font-size: 9px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+}
+.pill-bar {
+  width: 50px; height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.pill-bar-fill { height: 2px; background: var(--gold); border-radius: 2px; transition: width 0.4s; }
+
+/* ── SECTION HEADING ── */
+.section-heading {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin: 36px 0 16px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.year-heading::after {
+.section-heading::before {
   content: '';
-  flex: 1;
-  height: 1px;
+  width: 18px; height: 1px;
+  background: var(--muted);
+}
+.section-heading::after {
+  content: '';
+  flex: 1; height: 1px;
   background: var(--border);
 }
 
-/* ── SUBJECT GROUP LABEL ── */
-.subject-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 18px 0 8px 4px;
-}
-.subject-label:first-of-type { margin-top: 0; }
-
-/* ── PAPER CARD ── */
+/* ── PAPER CARD (kept for backward compat, hidden in v2) ── */
 .paper-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -527,20 +627,20 @@ body::before {
 
 <div class="stats-row">
   <div class="stat-item">
-    <div class="stat-num" id="total-papers">6</div>
-    <div class="stat-lbl">Papers ready</div>
+    <div class="stat-num" id="total-papers">10</div>
+    <div class="stat-lbl">Subjects</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num" id="total-questions">71</div>
-    <div class="stat-lbl">Questions</div>
+    <div class="stat-num">3</div>
+    <div class="stat-lbl">Years (2023–25)</div>
   </div>
   <div class="stat-item">
     <div class="stat-num" id="total-attempted">0</div>
     <div class="stat-lbl">Attempted</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num" id="total-years">1</div>
-    <div class="stat-lbl">Years covered</div>
+    <div class="stat-num" id="total-years">30</div>
+    <div class="stat-lbl">Papers total</div>
   </div>
 </div>
 
@@ -548,245 +648,334 @@ body::before {
 
   <!-- FILTER -->
   <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All Papers</button>
-    <button class="filter-btn" data-filter="ies">IES</button>
-    <button class="filter-btn" data-filter="iss">ISS</button>
-    <button class="filter-btn" data-filter="ge">General Economics</button>
-    <button class="filter-btn" data-filter="ie">Indian Economics</button>
-    <button class="filter-btn" data-filter="eng">English</button>
-    <button class="filter-btn" data-filter="gs">Gen. Studies</button>
-    <button class="filter-btn" data-filter="stat">Statistics</button>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ies">IES Only</button>
+    <button class="filter-btn" data-filter="iss">ISS Only</button>
+    <button class="filter-btn" data-filter="common">Common Papers</button>
   </div>
 
-  <!-- ── 2025 ── -->
-  <div class="year-group" data-year="2025">
-    <div class="year-heading">2025 — IES Papers ready ✓</div>
+  <!-- ══ IES SECTION ══ -->
+  <div class="section-heading" data-section="ies">Indian Economic Service</div>
 
-    <div class="subject-label" data-cat="ge" data-exam="ies">General Economics (IES)</div>
-
-    <a class="paper-card" href="ies-2025-general-economics-paper1.html" data-cat="ge" data-exam="ies" data-questions="13" data-storage="ies_prep_2025">
-      <div class="card-icon icon-ge">📘</div>
-      <div class="card-body">
-        <div class="card-title">General Economics — Paper I</div>
-        <div class="card-meta">
-          <span>13 questions</span><span class="card-meta-sep"></span>
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>Micro · Game Theory · Stats</span>
+  <!-- General English — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="common">
+    <div class="subject-header">
+      <div class="subject-icon icon-eng">✍️</div>
+      <div class="subject-title-block">
+        <div class="subject-name">General English</div>
+        <div class="subject-meta">100 marks · 3 hrs · Essay · Précis · Vocabulary · Grammar</div>
+      </div>
+      <span class="subject-exam-badge badge-eng">IES + ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-general-english.html" data-storage="ies_prep_2025_english" data-questions="6" data-bar="bar-eng-2025" data-prog="prog-eng-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-eng-2025">0 / 6</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-eng-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-ge">Gen. Eco</span>
-        <div class="card-progress" id="prog-ge1">0 / 13</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-ge1" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <a class="paper-card" href="ies-2025-general-economics-paper2.html" data-cat="ge" data-exam="ies" data-questions="16" data-storage="ies_prep_2025_ge2">
-      <div class="card-icon icon-ge">📗</div>
-      <div class="card-body">
-        <div class="card-title">General Economics — Paper II</div>
-        <div class="card-meta">
-          <span>16 questions</span><span class="card-meta-sep"></span>
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>Macro · IS-LM · Trade · Finance</span>
+  <!-- General Studies — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="common">
+    <div class="subject-header">
+      <div class="subject-icon icon-gs">🏛️</div>
+      <div class="subject-title-block">
+        <div class="subject-name">General Studies</div>
+        <div class="subject-meta">100 marks · 3 hrs · History · Geography · Economy · Polity</div>
+      </div>
+      <span class="subject-exam-badge badge-gs">IES + ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-general-studies.html" data-storage="ies_prep_2025_gs" data-questions="4" data-bar="bar-gs-2025" data-prog="prog-gs-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-gs-2025">0 / 4</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-gs-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-ge">Gen. Eco</span>
-        <div class="card-progress" id="prog-ge2">0 / 16</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-ge2" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <a class="paper-card" href="ies-2025-general-economics-paper3.html" data-cat="ge" data-exam="ies" data-questions="16" data-storage="ies_prep_2025_ge3">
-      <div class="card-icon icon-ge">📙</div>
-      <div class="card-body">
-        <div class="card-title">General Economics — Paper III</div>
-        <div class="card-meta">
-          <span>16 questions</span><span class="card-meta-sep"></span>
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>Public Finance · Environment · Planning</span>
+  <!-- General Economics I — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="ge">
+    <div class="subject-header">
+      <div class="subject-icon icon-ge">📘</div>
+      <div class="subject-title-block">
+        <div class="subject-name">General Economics — Paper I</div>
+        <div class="subject-meta">200 marks · 3 hrs · Micro · Game Theory · Statistics</div>
+      </div>
+      <span class="subject-exam-badge badge-ge">IES</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-general-economics-paper1.html" data-storage="ies_prep_2025" data-questions="13" data-bar="bar-ge1-2025" data-prog="prog-ge1-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-ge1-2025">0 / 13</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-ge1-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-ge">Gen. Eco</span>
-        <div class="card-progress" id="prog-ge3">0 / 16</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-ge3" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <div class="subject-label" data-cat="ie" data-exam="ies">Indian Economics (IES)</div>
-
-    <a class="paper-card" href="ies-2025-indian-economics.html" data-cat="ie" data-exam="ies" data-questions="16" data-storage="ies_prep_2025_indian_eco">
-      <div class="card-icon icon-ie">🇮🇳</div>
-      <div class="card-body">
-        <div class="card-title">Indian Economics</div>
-        <div class="card-meta">
-          <span>16 questions</span><span class="card-meta-sep"></span>
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>Agriculture · Fiscal · Trade · Social</span>
+  <!-- General Economics II — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="ge">
+    <div class="subject-header">
+      <div class="subject-icon icon-ge">📗</div>
+      <div class="subject-title-block">
+        <div class="subject-name">General Economics — Paper II</div>
+        <div class="subject-meta">200 marks · 3 hrs · Macro · IS-LM · Trade · Finance</div>
+      </div>
+      <span class="subject-exam-badge badge-ge">IES</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-general-economics-paper2.html" data-storage="ies_prep_2025_ge2" data-questions="16" data-bar="bar-ge2-2025" data-prog="prog-ge2-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-ge2-2025">0 / 16</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-ge2-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-ie">Indian Eco</span>
-        <div class="card-progress" id="prog-ie">0 / 16</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-ie" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <div class="subject-label" data-cat="eng" data-exam="ies">General English (IES)</div>
-
-    <a class="paper-card" href="ies-2025-general-english.html" data-cat="eng" data-exam="ies" data-questions="6" data-storage="ies_prep_2025_english">
-      <div class="card-icon icon-eng">✍️</div>
-      <div class="card-body">
-        <div class="card-title">General English</div>
-        <div class="card-meta">
-          <span>6 questions</span><span class="card-meta-sep"></span>
-          <span>100 marks</span><span class="card-meta-sep"></span>
-          <span>Essay · Précis · Vocabulary · Grammar</span>
+  <!-- General Economics III — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="ge">
+    <div class="subject-header">
+      <div class="subject-icon icon-ge">📙</div>
+      <div class="subject-title-block">
+        <div class="subject-name">General Economics — Paper III</div>
+        <div class="subject-meta">200 marks · 3 hrs · Public Finance · Environment · Planning</div>
+      </div>
+      <span class="subject-exam-badge badge-ge">IES</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-general-economics-paper3.html" data-storage="ies_prep_2025_ge3" data-questions="16" data-bar="bar-ge3-2025" data-prog="prog-ge3-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-ge3-2025">0 / 16</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-ge3-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-eng">English</span>
-        <div class="card-progress" id="prog-eng">0 / 6</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-eng" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <div class="subject-label" data-cat="gs" data-exam="ies">General Studies (IES)</div>
-
-    <a class="paper-card" href="ies-2025-general-studies.html" data-cat="gs" data-exam="ies" data-questions="4" data-storage="ies_prep_2025_gs">
-      <div class="card-icon icon-gs">🏛️</div>
-      <div class="card-body">
-        <div class="card-title">General Studies</div>
-        <div class="card-meta">
-          <span>4 questions · 20 parts</span><span class="card-meta-sep"></span>
-          <span>100 marks</span><span class="card-meta-sep"></span>
-          <span>History · Geography · Economy · Polity</span>
+  <!-- Indian Economics — IES -->
+  <div class="subject-group" data-exam="ies" data-cat="ie">
+    <div class="subject-header">
+      <div class="subject-icon icon-ie">🇮🇳</div>
+      <div class="subject-title-block">
+        <div class="subject-name">Indian Economics</div>
+        <div class="subject-meta">200 marks · 3 hrs · Agriculture · Fiscal · Trade · Social</div>
+      </div>
+      <span class="subject-exam-badge badge-ie">IES</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill" href="ies-2025-indian-economics.html" data-storage="ies_prep_2025_indian_eco" data-questions="16" data-bar="bar-ie-2025" data-prog="prog-ie-2025">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Ready ✓</div></div>
+        <div class="pill-right">
+          <span class="pill-badge badge-ready">Ready</span>
+          <div class="pill-prog" id="prog-ie-2025">0 / 16</div>
+          <div class="pill-bar"><div class="pill-bar-fill" id="bar-ie-2025" style="width:0%"></div></div>
         </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-ready">Ready</span>
-        <span class="card-badge badge-gs">Gen. Studies</span>
-        <div class="card-progress" id="prog-gs">0 / 4</div>
-        <div class="progress-mini"><div class="progress-mini-fill" id="bar-gs" style="width:0%"></div></div>
-      </div>
-    </a>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-  </div><!-- /year-group 2025 -->
+  <!-- ══ ISS SECTION ══ -->
+  <div class="section-heading" data-section="iss">Indian Statistical Service</div>
 
-  <!-- ── ISS 2025 ── -->
-  <div class="year-group" data-year="2025-iss">
-    <div class="year-heading">2025 — ISS Papers <span style="color:var(--muted);font-size:9px;">(Coming Soon)</span></div>
+  <!-- Statistics I — ISS -->
+  <div class="subject-group" data-exam="iss" data-cat="stat">
+    <div class="subject-header">
+      <div class="subject-icon icon-stat">📊</div>
+      <div class="subject-title-block">
+        <div class="subject-name">Statistics — Paper I</div>
+        <div class="subject-meta">200 marks · 3 hrs · Probability · Distributions · Sampling Theory</div>
+      </div>
+      <span class="subject-exam-badge badge-iss">ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <div class="subject-label" data-cat="stat" data-exam="iss">Statistics (ISS)</div>
+  <!-- Statistics II — ISS -->
+  <div class="subject-group" data-exam="iss" data-cat="stat">
+    <div class="subject-header">
+      <div class="subject-icon icon-stat">📉</div>
+      <div class="subject-title-block">
+        <div class="subject-name">Statistics — Paper II</div>
+        <div class="subject-meta">200 marks · 3 hrs · Statistical Inference · Linear Models · Design</div>
+      </div>
+      <span class="subject-exam-badge badge-iss">ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <a class="paper-card" href="#" data-cat="stat" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-stat">📊</div>
-      <div class="card-body">
-        <div class="card-title">Statistics — Paper I</div>
-        <div class="card-meta">
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>Probability · Distributions · Sampling Theory</span>
-        </div>
+  <!-- Statistics III — ISS -->
+  <div class="subject-group" data-exam="iss" data-cat="stat">
+    <div class="subject-header">
+      <div class="subject-icon icon-stat">📈</div>
+      <div class="subject-title-block">
+        <div class="subject-name">Statistics — Paper III</div>
+        <div class="subject-meta">200 marks · 3 hrs · Econometrics · Time Series · Survey Sampling</div>
       </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
+      <span class="subject-exam-badge badge-iss">ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <a class="paper-card" href="#" data-cat="stat" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-stat">📉</div>
-      <div class="card-body">
-        <div class="card-title">Statistics — Paper II</div>
-        <div class="card-meta">
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>Statistical Inference · Linear Models · Design</span>
-        </div>
+  <!-- Statistics IV — ISS -->
+  <div class="subject-group" data-exam="iss" data-cat="stat">
+    <div class="subject-header">
+      <div class="subject-icon icon-stat">🗂️</div>
+      <div class="subject-title-block">
+        <div class="subject-name">Statistics — Paper IV</div>
+        <div class="subject-meta">200 marks · 3 hrs · Operations Research · SQC · Demography</div>
       </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
+      <span class="subject-exam-badge badge-iss">ISS</span>
+    </div>
+    <div class="year-pills">
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2025</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2024</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+      <a class="year-pill pill-soon" href="#">
+        <div class="pill-year">2023</div>
+        <div class="pill-body"><div class="pill-status">Coming soon</div></div>
+        <div class="pill-right"><span class="pill-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border)">Soon</span></div>
+      </a>
+    </div>
+  </div>
 
-    <a class="paper-card" href="#" data-cat="stat" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-stat">📈</div>
-      <div class="card-body">
-        <div class="card-title">Statistics — Paper III</div>
-        <div class="card-meta">
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>Econometrics · Time Series · Survey Sampling</span>
-        </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
-
-    <a class="paper-card" href="#" data-cat="stat" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-stat">🗂️</div>
-      <div class="card-body">
-        <div class="card-title">Statistics — Paper IV</div>
-        <div class="card-meta">
-          <span>200 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>Operations Research · SQC · Demography · Vital Stats</span>
-        </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
-
-    <div class="subject-label" data-cat="eng" data-exam="iss">General English (ISS)</div>
-
-    <a class="paper-card" href="#" data-cat="eng" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-eng">✍️</div>
-      <div class="card-body">
-        <div class="card-title">General English</div>
-        <div class="card-meta">
-          <span>100 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>Essay · Précis · Vocabulary · Grammar</span>
-        </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
-
-    <div class="subject-label" data-cat="gs" data-exam="iss">General Studies (ISS)</div>
-
-    <a class="paper-card" href="#" data-cat="gs" data-exam="iss" data-questions="0" data-storage="" style="opacity:0.55;pointer-events:none;">
-      <div class="card-icon icon-gs">🏛️</div>
-      <div class="card-body">
-        <div class="card-title">General Studies</div>
-        <div class="card-meta">
-          <span>100 marks</span><span class="card-meta-sep"></span>
-          <span>3 hrs</span><span class="card-meta-sep"></span>
-          <span>History · Geography · Economy · Polity</span>
-        </div>
-      </div>
-      <div class="card-right">
-        <span class="card-badge badge-iss">ISS</span>
-        <span class="card-badge" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);">Soon</span>
-      </div>
-    </a>
-
-  </div><!-- /year-group 2025-iss -->
+  <!-- ABOUT THE EXAM -->
+  <div class="about-section">
 
   <!-- ABOUT THE EXAM -->
   <div class="about-section">
@@ -913,12 +1102,12 @@ body::before {
 <script>
 // ── PAPERS REGISTRY ──────────────────────────────────────────────────────────
 const PAPERS = [
-  { storageKey:'ies_prep_2025',             questions:13, barId:'bar-ge1',  progId:'prog-ge1'  },
-  { storageKey:'ies_prep_2025_ge2',         questions:16, barId:'bar-ge2',  progId:'prog-ge2'  },
-  { storageKey:'ies_prep_2025_ge3',         questions:16, barId:'bar-ge3',  progId:'prog-ge3'  },
-  { storageKey:'ies_prep_2025_indian_eco',  questions:16, barId:'bar-ie',   progId:'prog-ie'   },
-  { storageKey:'ies_prep_2025_english',     questions:6,  barId:'bar-eng',  progId:'prog-eng'  },
-  { storageKey:'ies_prep_2025_gs',          questions:4,  barId:'bar-gs',   progId:'prog-gs'   },
+  { storageKey:'ies_prep_2025',             questions:13, barId:'bar-ge1-2025',  progId:'prog-ge1-2025'  },
+  { storageKey:'ies_prep_2025_ge2',         questions:16, barId:'bar-ge2-2025',  progId:'prog-ge2-2025'  },
+  { storageKey:'ies_prep_2025_ge3',         questions:16, barId:'bar-ge3-2025',  progId:'prog-ge3-2025'  },
+  { storageKey:'ies_prep_2025_indian_eco',  questions:16, barId:'bar-ie-2025',   progId:'prog-ie-2025'   },
+  { storageKey:'ies_prep_2025_english',     questions:6,  barId:'bar-eng-2025',  progId:'prog-eng-2025'  },
+  { storageKey:'ies_prep_2025_gs',          questions:4,  barId:'bar-gs-2025',   progId:'prog-gs-2025'   },
 ];
 
 function getProgress(storageKey, total) {
@@ -931,11 +1120,10 @@ function getProgress(storageKey, total) {
 }
 
 function updateAll() {
-  let totalAttempted = 0, totalQs = 0;
+  let totalAttempted = 0;
   PAPERS.forEach(p => {
     const { attempted, total } = getProgress(p.storageKey, p.questions);
     totalAttempted += attempted;
-    totalQs += total;
     const pct = total > 0 ? Math.round((attempted / total) * 100) : 0;
     const bar  = document.getElementById(p.barId);
     const prog = document.getElementById(p.progId);
@@ -951,31 +1139,26 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
     const f = this.dataset.filter;
-    document.querySelectorAll('.paper-card').forEach(card => {
-      const cat  = card.dataset.cat;
-      const exam = card.dataset.exam;
+
+    document.querySelectorAll('.subject-group').forEach(grp => {
+      const exam = grp.dataset.exam;
+      const cat  = grp.dataset.cat;
       let show = false;
-      if (f === 'all')        show = true;
-      else if (f === 'ies')   show = exam === 'ies';
-      else if (f === 'iss')   show = exam === 'iss';
-      else                    show = cat === f;
-      card.style.display = show ? 'flex' : 'none';
+      if (f === 'all')         show = true;
+      else if (f === 'ies')    show = exam === 'ies';
+      else if (f === 'iss')    show = exam === 'iss';
+      else if (f === 'common') show = cat === 'common';
+      grp.style.display = show ? 'block' : 'none';
     });
-    document.querySelectorAll('.subject-label').forEach(lbl => {
-      const cat  = lbl.dataset.cat;
-      const exam = lbl.dataset.exam;
-      let show = false;
-      if (f === 'all')        show = true;
-      else if (f === 'ies')   show = exam === 'ies';
-      else if (f === 'iss')   show = exam === 'iss';
-      else                    show = !cat || cat === f;
-      lbl.style.display = show ? 'block' : 'none';
-    });
-    // hide year-group headings that have no visible cards
-    document.querySelectorAll('.year-group').forEach(grp => {
-      const visible = grp.querySelectorAll('.paper-card[style*="flex"]').length ||
-                      [...grp.querySelectorAll('.paper-card')].some(c => c.style.display !== 'none');
-      grp.style.display = visible ? 'block' : 'none';
+
+    // show/hide section headings
+    document.querySelectorAll('.section-heading').forEach(h => {
+      const sec = h.dataset.section;
+      let show = true;
+      if (f === 'ies')    show = sec === 'ies';
+      else if (f === 'iss') show = sec === 'iss';
+      else if (f === 'common') show = false;
+      h.style.display = show ? 'flex' : 'none';
     });
   });
 });
