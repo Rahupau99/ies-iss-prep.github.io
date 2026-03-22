@@ -301,6 +301,149 @@ body::before {
   transition: width 0.4s;
 }
 
+/* ── ABOUT SECTION ── */
+.about-section { margin-bottom: 32px; }
+
+.about-banner {
+  background: linear-gradient(135deg, #1a1c2e 0%, #1e2038 100%);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.about-banner::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,168,67,0.1);
+}
+.about-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.about-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.about-date-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.about-chip {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.2);
+  color: var(--gold2);
+  font-weight: 500;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+@media (max-width: 480px) { .about-grid { grid-template-columns: 1fr; } }
+
+.about-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.about-card-icon { font-size: 20px; margin-bottom: 8px; }
+.about-card-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.about-card-body { font-size: 12px; color: var(--muted2); }
+.vacancy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.vacancy-row:last-of-type { border-bottom: none; }
+.vacancy-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  color: var(--gold2);
+  font-weight: 500;
+}
+.vacancy-total {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+}
+.about-list { display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+.about-list div::before {
+  content: '→ ';
+  color: var(--gold);
+}
+
+.motivation-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.motivation-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.motivation-sub {
+  font-size: 12px;
+  color: var(--muted2);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.motivation-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+@media (max-width: 480px) { .motivation-stats { grid-template-columns: repeat(2, 1fr); } }
+.mstat { text-align: center; }
+.mstat-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  color: var(--gold2);
+  font-weight: 500;
+  line-height: 1;
+}
+.mstat-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
 /* ── HOW TO USE ── */
 .howto {
   background: var(--bg2);
@@ -375,7 +518,7 @@ body::before {
 <header class="site-header">
   <div class="header-eyebrow">IES / ISS Examination Prep</div>
   <h1 class="header-title">Question Paper<br/><em>Library</em></h1>
-  <p class="header-sub">All 2025 papers — General Economics, Indian Economics, General English and General Studies — with model answers, examiner tips, and performance tracking.</p>
+  <p class="header-sub">Your complete prep companion for the UPSC Indian Economic Service examination. Practice 2025 papers with model answers, examiner tips, and performance tracking — all offline, all free.</p>
   <div class="header-divider"></div>
 </header>
 
@@ -530,6 +673,77 @@ body::before {
     </a>
 
   </div><!-- /year-group 2025 -->
+
+  <!-- ABOUT THE EXAM -->
+  <div class="about-section">
+
+    <div class="about-banner">
+      <div class="about-banner-inner">
+        <div class="about-tag">UPSC Notification No. 07/2026-IES/ISS</div>
+        <div class="about-headline">IES/ISS Examination 2026</div>
+        <div class="about-date-row">
+          <span class="about-chip">📅 Exam starts: 19 June 2026</span>
+          <span class="about-chip">📝 Apply by: 3 March 2026</span>
+          <span class="about-chip">🌐 upsconline.nic.in</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-icon">🎯</div>
+        <div class="about-card-title">Vacancies 2026</div>
+        <div class="about-card-body">
+          <div class="vacancy-row"><span>Indian Economic Service</span><span class="vacancy-num">16</span></div>
+          <div class="vacancy-row"><span>Indian Statistical Service</span><span class="vacancy-num">28</span></div>
+          <div class="vacancy-total">Total: 44 posts</div>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-icon">📋</div>
+        <div class="about-card-title">Exam Pattern (IES)</div>
+        <div class="about-card-body">
+          <div class="vacancy-row"><span>Written (6 papers)</span><span class="vacancy-num">1000</span></div>
+          <div class="vacancy-row"><span>Viva voce / Interview</span><span class="vacancy-num">200</span></div>
+          <div class="vacancy-total">Grand Total: 1200 marks</div>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-icon">🎓</div>
+        <div class="about-card-title">Eligibility (IES)</div>
+        <div class="about-card-body about-list">
+          <div>Post-Graduate degree in Economics / Applied Economics / Business Economics / Econometrics</div>
+          <div>Age: 21–30 years as on 1 Aug 2026</div>
+          <div>Relaxation: SC/ST +5 yrs · OBC +3 yrs · PwBD +10 yrs</div>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-icon">📚</div>
+        <div class="about-card-title">Papers (IES)</div>
+        <div class="about-card-body about-list">
+          <div>General English — 100 marks · 3 hrs</div>
+          <div>General Studies — 100 marks · 3 hrs</div>
+          <div>General Economics I, II, III — 200 each</div>
+          <div>Indian Economics — 200 marks · 3 hrs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motivation-box">
+      <div class="motivation-quote">"The IES is one of India's most prestigious Group A central services — officers shape economic policy, work with the Finance Ministry, Planning Commission and international bodies like the IMF and World Bank."</div>
+      <div class="motivation-sub">Only ~16 economists are selected nationwide each year. That makes every mark count — and every question you practise here an investment in your future.</div>
+      <div class="motivation-stats">
+        <div class="mstat"><div class="mstat-num">1200</div><div class="mstat-lbl">Total marks</div></div>
+        <div class="mstat"><div class="mstat-num">16</div><div class="mstat-lbl">IES seats (2026)</div></div>
+        <div class="mstat"><div class="mstat-num">6</div><div class="mstat-lbl">Papers to master</div></div>
+        <div class="mstat"><div class="mstat-num">200</div><div class="mstat-lbl">Interview marks</div></div>
+      </div>
+    </div>
+
+  </div>
 
   <!-- HOW TO USE -->
   <div class="howto">
